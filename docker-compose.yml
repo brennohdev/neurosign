@@ -1,0 +1,22 @@
+services:
+  backend:
+    build: ./apps/backend
+    ports:
+      - "8000:8000"
+    environment:
+      WINDOW_SIZE: "30"
+      STRIDE: "5"
+      MODEL_PATH: /app/models/neurosign_int8.onnx
+      HOST: "0.0.0.0"
+      PORT: "8000"
+    volumes:
+      - ./models:/app/models:ro
+
+  frontend:
+    build: ./apps/frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    environment:
+      VITE_WS_URL: ws://localhost:8000/ws

@@ -1,0 +1,269 @@
+/* NeuroSign — base styles */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #0f0f0f;
+  color: #f0f0f0;
+  min-height: 100dvh;
+}
+
+/* App layout */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.app__header {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.app__title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.app__subtitle {
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 0.25rem;
+}
+
+.app__main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+}
+
+@media (min-width: 640px) {
+  .app__main {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .app__video-section {
+    flex: 1;
+  }
+
+  .app__prediction-section {
+    flex: 1;
+  }
+}
+
+.app__reconnecting {
+  background: #2a1a00;
+  border: 1px solid #f59e0b;
+  color: #f59e0b;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.app__footer {
+  padding: 0.5rem 0;
+}
+
+/* VideoFeed */
+.video-feed {
+  position: relative;
+  background: #1a1a1a;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-feed__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.video-feed__loading,
+.video-feed__error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  text-align: center;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+.video-feed__error {
+  color: #f87171;
+}
+
+.video-feed__spinner {
+  display: block;
+  width: 32px;
+  height: 32px;
+  border: 3px solid #333;
+  border-top-color: #60a5fa;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* PredictionDisplay */
+.prediction-display {
+  background: #1a1a1a;
+  border-radius: 8px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.prediction-display__main {
+  text-align: center;
+}
+
+.prediction-display__label {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.prediction-display__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.prediction-display__item {
+  display: grid;
+  grid-template-columns: 6rem 1fr 3rem;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.prediction-display__item-label {
+  font-weight: 500;
+  text-transform: capitalize;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.prediction-display__bar-track {
+  background: #2d2d2d;
+  border-radius: 4px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.prediction-display__bar-fill {
+  height: 100%;
+  background: #3b82f6;
+  border-radius: 4px;
+  transition: width 0.15s ease;
+}
+
+.prediction-display__item-confidence {
+  text-align: right;
+  color: #888;
+}
+
+.prediction-display__controls {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  background: #1a1a1a;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+.controls__status {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+.controls__status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.controls__status-dot--connected {
+  background: #22c55e;
+}
+
+.controls__status-dot--disconnected {
+  background: #f59e0b;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.controls__buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Shared button style */
+.controls__btn,
+.prediction-display__btn {
+  background: #2d2d2d;
+  color: #e2e8f0;
+  border: 1px solid #3d3d3d;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.controls__btn:hover,
+.prediction-display__btn:hover {
+  background: #3d3d3d;
+}
+
+.controls__btn[aria-pressed="true"],
+.prediction-display__btn[aria-pressed="true"] {
+  background: #1d4ed8;
+  border-color: #3b82f6;
+  color: #fff;
+}
