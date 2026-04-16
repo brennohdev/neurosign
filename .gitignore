@@ -30,4 +30,4 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
-.kiro/*
+.kiro/
